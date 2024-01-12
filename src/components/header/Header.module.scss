@@ -1,0 +1,14 @@
+@import "../../shared.module";
+
+.header {
+  background: $blue;
+  width: 100vw;
+  height: 100px;
+  color: $white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+
+
+}
