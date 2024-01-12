@@ -2,20 +2,23 @@ import {useEffect, useState} from 'react'
 import classes from './App.module.scss'
 import Header from "./components/header/Header.tsx";
 import AmortizationTable from "./components/amortization-table/AmortizationTable.tsx";
+import RepaymentDetails from "./components/repayment-details/RepaymentDetails.tsx";
 
 function App() {
-    const [results, setResults] = useState({
-        repaymentAmount: 0,
-        totalInterest: 0,
-        loanAmount: 0,
-        costOfCredit: 0
-    });
+    const [results, setResults] = useState<Results>(
+        {
+            repaymentAmount: 0,
+            totalInterest: 0,
+            loanAmount: 0,
+            costOfCredit: 0
+        }
+    );
 
   const [loanForm, setLoanForm] = useState({
       initialAmount: { value: 1200000, error: '' },
       deposit: { value: 400000, error: '' },
       interest: { value: 0, error: '' },
-      term: { value: 20, error: '' },
+      term: { value: 1, error: '' },
       additionalPayment: { value: 0, error: '' }
   });
 
@@ -148,30 +151,13 @@ function App() {
                 </div>
             </div>
 
-
             <button type='submit'>Calculate</button>
 
         </form>
 
-        <div className={classes.results}>
-            <h4>Repayment Details</h4>
-            <div className={classes.details}>
-                <div className={classes.titles}>
-                    <span>Loan amount:</span>
-                    <span>Monthly repayment:</span>
-                    <span>Total interest:</span>
-                    <span>Cost of credit:</span>
-                </div>
-                <div className={classes.amounts}>
-                    <span>{results.loanAmount.toLocaleString('en-US')}</span>
-                    <span>{results.repaymentAmount.toLocaleString('en-US')}</span>
-                    <span>{results.totalInterest.toLocaleString('en-US')}</span>
-                    <span>{results.costOfCredit.toLocaleString('en-US')}</span>
-                </div>
-            </div>
-        </div>
+        <RepaymentDetails costOfCredit={results!.costOfCredit} loanAmount={results!.loanAmount} repaymentAmount={results!.repaymentAmount} totalInterest={results!.totalInterest}></RepaymentDetails>
         
-        <AmortizationTable openingBalance={results.loanAmount} monthlyPayment={results.repaymentAmount} interestRate={(loanForm.interest.value / 100) /12 } termMonths={loanForm.term.value * 12}></AmortizationTable>
+        <AmortizationTable openingBalance={results!.loanAmount} monthlyPayment={results!.repaymentAmount} interestRate={(loanForm.interest.value / 100) /12 } termMonths={loanForm.term.value * 12}></AmortizationTable>
     </>
   )
 }
