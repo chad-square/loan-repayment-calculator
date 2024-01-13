@@ -18,7 +18,7 @@ export default function LoanForm({handleResults}: LoanFormProps) {
     const [loanForm, setLoanForm] = useState<LoanForm>({
         initialAmount: { value: 1200000, error: '' },
         deposit: { value: 400000, error: '' },
-        interest: { value: 0, error: '' },
+        interest: { value: 11.0, error: '' },
         term: { value: 1, error: '' },
         additionalPayment: { value: 0, error: '' }
     });
@@ -27,9 +27,16 @@ export default function LoanForm({handleResults}: LoanFormProps) {
         fetch('https://custom.resbank.co.za/SarbWebApi/WebIndicators/CurrentMarketRates')
             .then(data => data.json())
             .then(jsonResponse => {
+                console.log(jsonResponse);
                 const data = jsonResponse.filter(marketIndicator => marketIndicator['Name'] === 'Prime lending rate')
                 setLoanForm(prevState => {
                     return ({...prevState, interest: {...prevState.interest, value: data[0]['Value']}})
+                })
+            })
+            .catch(error => {
+                console.warn('error getting prime lending rate: ', error);
+                setLoanForm(prevState => {
+                    return ({...prevState, interest: {...prevState.interest, value: 11.00}})
                 })
             })
     }, []);
@@ -70,6 +77,8 @@ export default function LoanForm({handleResults}: LoanFormProps) {
     function handleCalculate(event) {
         event.preventDefault()
 
+        console.log(loanForm);
+
         for (const loanFormKey in loanForm) {
             if (loanForm[loanFormKey].error.length) {
                 console.error('invalid form', loanFormKey)
@@ -79,6 +88,7 @@ export default function LoanForm({handleResults}: LoanFormProps) {
 
         const a = loanForm.initialAmount.value - loanForm.deposit.value;
         const r = (+loanForm.interest.value / 100) / 12;
+        console.log(r)
         const n = +loanForm.term.value * 12;
         const p =(a) / ((  Math.pow((1 + r), n)  - 1 ) / ( r * Math.pow((1 + r), n)));
 

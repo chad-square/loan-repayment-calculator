@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {ChangeEvent, useEffect, useState} from "react";
 import classes from "./AmortizationTable.module.scss"
 
 interface Props {
@@ -48,7 +48,7 @@ export default function AmortizationTable({openingBalance, monthlyPayment, inter
         calculate();
     }, [openingBalance, monthlyPayment, interestRate, termMonths, additionalPayment.value])
 
-    function handleAddPmtUpdate(event) {
+    function handleAddPmtUpdate(event: ChangeEvent<HTMLInputElement>) {
         if (isNaN(event.target.value)) {
             setAdditionalPayment(prevState => ({...prevState, error: 'Enter a valid value'}))
             return
