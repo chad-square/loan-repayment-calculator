@@ -34,7 +34,7 @@ export default function AmortizationTable({openingBalance, monthlyPayment, inter
 
             balances.push({
                 month: i + 1,
-                payment: monthlyPayment,
+                payment: monthlyPayment + additionalPayment.value,
                 interest: interest,
                 principal: principal,
                 closingBalance: closingBalance
@@ -54,7 +54,7 @@ export default function AmortizationTable({openingBalance, monthlyPayment, inter
             return
         }
 
-        if (+event.targetvalue < 0) {
+        if (+event.target.value < 0) {
             setAdditionalPayment(prevState => ({...prevState, error: 'Enter a valid value'}))
             return
         }
@@ -68,12 +68,13 @@ export default function AmortizationTable({openingBalance, monthlyPayment, inter
 
             <div className={classes.additionalPayment}>
                 <label htmlFor="additionalPayment">Additional Payment</label>
-                <input type="text" id='additionalPayment' value={additionalPayment.value}
-                       onChange={onAddUpdsate}/>
+
+                <input type="text" id='additionalPayment' value={additionalPayment.value} onChange={onAddUpdsate}/>
 
                 <div className={classes.errorContainer}>
                     <p>{additionalPayment.error}</p>
                 </div>
+
             </div>
 
             <table>

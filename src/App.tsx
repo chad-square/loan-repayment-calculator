@@ -22,15 +22,17 @@ function App() {
 
   return (
     <>
-        <Header></Header>
+        <Header/>
 
-        <LoanForm handleResults={onSetResults}></LoanForm>
+        <main>
+            <LoanForm handleResults={onSetResults}></LoanForm>
 
-        <RepaymentDetails costOfCredit={results!.costOfCredit} loanAmount={results!.loanAmount}
-                          repaymentAmount={results!.repaymentAmount} totalInterest={results!.totalInterest}/>
+            <RepaymentDetails costOfCredit={results!.costOfCredit} loanAmount={results!.loanAmount}
+                              repaymentAmount={results!.repaymentAmount} totalInterest={results!.totalInterest}/>
 
-        <AmortizationTable openingBalance={results!.loanAmount} monthlyPayment={results!.repaymentAmount}
-                           interestRate={results.rate} termMonths={results.termMonths}/>
+            <AmortizationTable openingBalance={results!.loanAmount} monthlyPayment={results!.repaymentAmount}
+                               interestRate={results.rate} termMonths={results.termMonths}/>
+        </main>
 
     </>
   )
