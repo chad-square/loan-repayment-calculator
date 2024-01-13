@@ -1,0 +1,122 @@
+@import "../../shared.module.scss";
+
+form {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+
+  .submitBtn {
+    height: 30px;
+    width: 100px;
+    background: $blue;
+    border: none;
+    border-radius: 5px;
+    color: $white;
+    font-size: medium;
+    cursor: pointer;
+    margin: auto;
+
+    &:hover, &:active {
+      background-color: $blue2;
+      outline: none;
+    }
+  }
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+
+
+  input[type="range"] {
+    cursor: pointer;
+    margin-top: 7px;
+  }
+
+  // Track Styles
+  // Chrome, Safari, Opera, Edge
+  input[type="range"]::-webkit-slider-runnable-track {
+    background: $blue;
+    height: 0.6em;
+    border-radius: 5px;
+  }
+
+  // Track Styles
+  // Firefox
+  input[type="range"]::-moz-range-track {
+    background: $blue;
+    height: 0.6em;
+    border-radius: 5px;
+  }
+
+
+  // Thumb Styles
+  // Chrome, Safari, Opera, Edge
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    margin-top: -4px;
+    background: wheat;
+    color: red;
+    height: 10rem;
+    width: 0.7rem;
+  }
+
+  // Thumb Styles
+  // Firefox
+  input[type="range"]::-moz-range-thumb {
+    -moz-appearance: none;
+    border: none;
+    border-radius: 0;
+    background-color: red;
+    height: 10rem;
+    width: 1rem;
+  }
+}
+
+
+
+.control {
+  display: flex;
+  flex-direction: column;
+}
+
+.errorContainer {
+  height: 20px;
+  width: 200px;
+  color: red;
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+
+
+@media only screen and (max-width: 600px) {
+  .controls {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .submitBtn {
+    margin: auto;
+  }
+
+}
+
+@media only screen and (min-width: 600px) {
+  .controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .submitBtn {
+    //position: relative;
+    //top: 60px;
+    //left: -60px;
+  }
+}

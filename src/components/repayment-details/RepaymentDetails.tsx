@@ -1,6 +1,13 @@
 import classes from "../../App.module.scss";
 
-export default function RepaymentDetails({repaymentAmount, loanAmount, totalInterest, costOfCredit}: Results) {
+interface RepaymentDetailsProps {
+    repaymentAmount: number,
+    totalInterest: number,
+    loanAmount: number,
+    costOfCredit: number
+}
+
+export default function RepaymentDetails({repaymentAmount, loanAmount, totalInterest, costOfCredit}: RepaymentDetailsProps) {
 
     return (
         <div className={classes.results}>

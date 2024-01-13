@@ -1,3 +1,10 @@
+.additionalPayment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
 
 table {
   width: 90vw;
@@ -15,3 +22,5 @@ tr:nth-child(even) {
 th:nth-child(even),td:nth-child(even) {
   background-color: rgba(150, 212, 212, 0.4);
 }
+
+
