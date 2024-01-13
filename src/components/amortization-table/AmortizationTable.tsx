@@ -48,7 +48,7 @@ export default function AmortizationTable({openingBalance, monthlyPayment, inter
         calculate();
     }, [openingBalance, monthlyPayment, interestRate, termMonths, additionalPayment.value])
 
-    function onAddUpdsate(event) {
+    function handleAddPmtUpdate(event) {
         if (isNaN(event.target.value)) {
             setAdditionalPayment(prevState => ({...prevState, error: 'Enter a valid value'}))
             return
@@ -69,7 +69,7 @@ export default function AmortizationTable({openingBalance, monthlyPayment, inter
             <div className={classes.additionalPayment}>
                 <label htmlFor="additionalPayment">Additional Payment</label>
 
-                <input type="text" id='additionalPayment' value={additionalPayment.value} onChange={onAddUpdsate}/>
+                <input type="text" id='additionalPayment' value={additionalPayment.value} onChange={handleAddPmtUpdate}/>
 
                 <div className={classes.errorContainer}>
                     <p>{additionalPayment.error}</p>
